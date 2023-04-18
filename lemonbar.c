@@ -1479,21 +1479,10 @@ main (int argc, char **argv)
     while ((ch = getopt(argc, argv, "hg:bdf:a:pu:B:F:U:l:n:o:")) != -1) {
         switch (ch) {
             case 'h':
-                printf ("lemonbar version %s patched with XFT support\n", VERSION);
-                printf ("usage: %s [-h | -g | -b | -d | -f | -a | -p | -n | -u | -B | -F]\n"
-                        "\t-h Show this help\n"
-                        "\t-g Set the bar geometry {width}x{height}+{xoffset}+{yoffset}\n"
-                        "\t-b Put the bar at the bottom of the screen\n"
-                        "\t-d Force docking (use this if your WM isn't EWMH compliant)\n"
-                        "\t-f Set the font name to use\n"
-                        "\t-a Number of clickable areas available (default is 10)\n"
-                        "\t-p Don't close after the data ends\n"
-                        "\t-n Set the WM_NAME atom to the specified value for this bar\n"
-                        "\t-l Set the overline height in pixels\n"
-                        "\t-u Set the underline height in pixels\n"
-                        "\t-B Set background color in #AARRGGBB\n"
-                        "\t-F Set foreground color in #AARRGGBB\n"
-                        "\t-o Add a vertical offset to the text, it can be negative\n", argv[0]);
+                printf ("lemonbar version %s\n", VERSION);
+                printf ("usage: %s [-bhdp] [-B #[AA]RRGGBB] [-F #[AA]RRGGBB] [-a number] [-f font]\n"
+                        "       [-g WxH+X+Y] [-l height] [-o offset] [-u height]\n",
+                        argv[0]);
                 exit (EXIT_SUCCESS);
             case 'g': (void)parse_geometry_string(optarg, geom_v); break;
             case 'p': permanent = true; break;
