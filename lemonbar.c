@@ -116,6 +116,7 @@ static bool dock = false;
 static bool topbar = true;
 static int bw = -1, bh = -1, bx = 0, by = 0;
 static int bu = 1; // Underline height
+static int bo = 1; // Overline height
 static rgba_t fgc, bgc, ugc;
 static rgba_t dfgc, dbgc, dugc;
 static area_stack_t area_stack;
@@ -286,7 +287,7 @@ draw_lines (monitor_t *mon, int x, int w)
 {
     /* We can render both at the same time */
     if (attrs & ATTR_OVERL)
-        fill_rect(mon->pixmap, gc[GC_ATTR], x, 0, w, bu);
+        fill_rect(mon->pixmap, gc[GC_ATTR], x, 0, w, bo);
     if (attrs & ATTR_UNDERL)
         fill_rect(mon->pixmap, gc[GC_ATTR], x, bh - bu, w, bu);
 }
@@ -1475,7 +1476,7 @@ main (int argc, char **argv)
     // Connect to the Xserver and initialize scr
     xconn();
 
-    while ((ch = getopt(argc, argv, "hg:bdf:a:pu:B:F:U:n:o:")) != -1) {
+    while ((ch = getopt(argc, argv, "hg:bdf:a:pu:B:F:U:l:n:o:")) != -1) {
         switch (ch) {
             case 'h':
                 printf ("lemonbar version %s patched with XFT support\n", VERSION);
@@ -1488,7 +1489,8 @@ main (int argc, char **argv)
                         "\t-a Number of clickable areas available (default is 10)\n"
                         "\t-p Don't close after the data ends\n"
                         "\t-n Set the WM_NAME atom to the specified value for this bar\n"
-                        "\t-u Set the underline/overline height in pixels\n"
+                        "\t-l Set the overline height in pixels\n"
+                        "\t-u Set the underline height in pixels\n"
                         "\t-B Set background color in #AARRGGBB\n"
                         "\t-F Set foreground color in #AARRGGBB\n"
                         "\t-o Add a vertical offset to the text, it can be negative\n", argv[0]);
@@ -1499,6 +1501,7 @@ main (int argc, char **argv)
             case 'b': topbar = false; break;
             case 'd': dock = true; break;
             case 'f': font_load(optarg); break;
+            case 'l': bo = strtoul(optarg, NULL, 10); break;
             case 'u': bu = strtoul(optarg, NULL, 10); break;
             case 'o': add_y_offset(strtol(optarg, NULL, 10)); break;
             case 'B': dbgc = bgc = parse_color(optarg, NULL, (rgba_t)0x00000000U); break;

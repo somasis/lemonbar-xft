@@ -53,6 +53,10 @@ Set the WM_NAME atom value for the bar.
 
 Sets the underline width in pixels. The default is 1.
 
+=item B<-l> I<pixel>
+
+Sets the overline width in pixels. The default is 1.
+
 =item B<-B> I<color>
 
 Set the background color of the bar. I<color> must be specified in the hex format (#aarrggbb, #rrggbb, #rgb). If no compositor such as compton or xcompmgr is running the alpha channel is silently ignored.
@@ -108,6 +112,10 @@ Set the text foreground color. The parameter I<color> can be I<-> or a color in 
 =item B<T>I<index>
 
 Set the font used to draw the following text. The parameter I<index> can either be I<-> or the 1-based index of the slot which contains the desired font. If the parameter is I<-> lemonbar resets to the normal behavior (matching the first font that can be used for the character). If the selected font can't be used to draw a character, lemonbar will fall back to normal behavior for that character
+
+=item B<L>I<color>
+
+Set the text overline color. The parameter I<color> can be I<-> or a color in one of the formats mentioned before. The special value I<-> resets the color to the default one.
 
 =item B<U>I<color>
 
